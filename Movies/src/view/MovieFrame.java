@@ -127,9 +127,13 @@ public class MovieFrame extends JFrame {
 		home.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e){
-				System.out.println("Home!!!!");
+				setVisible(false);
 			}
 		});
+	}
+	
+	public JButton getHomeButton(){
+		return home;
 	}
 
 

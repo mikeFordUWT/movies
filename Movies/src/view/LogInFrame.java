@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -16,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class LogInFrame extends JFrame {
+	
+	private HashMap<String, String> users;
 	private static final int LOGO_SIZE = 18;
 	private JTextField userName;
 	private JTextField passField;
@@ -34,7 +37,10 @@ public class LogInFrame extends JFrame {
 	private Box logBox;
 	
 	public LogInFrame() {
+		
+		
 		super("Reel Log");
+		addUsers();
 		userName = new JTextField("", 15);
 		passField = new JTextField("", 15);
 		userLabel = new JLabel("Username: ");
@@ -71,6 +77,13 @@ public class LogInFrame extends JFrame {
 		upPanel.setBackground(upperBarColor);
 	}
 	
+	private void addUsers(){
+		users = new HashMap<String,String>();
+		users.put("jilarson@uw.edu", "husky123");
+		users.put("fordm13@uw.edu", "password");
+		users.put("andybleich@gmail.com", "league19");
+	}
+	
 	private void buildCenter(){
 		
 		logListen();
@@ -93,13 +106,20 @@ public class LogInFrame extends JFrame {
 		logButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("USER: "+userName.getText());
-				System.out.println("PASS: " + passField.getText());
-				System.out.println("LOGIN!!!!");
+				if(users.containsKey(userName.getText())&& users.containsValue(passField.getText())){
+					System.out.println("LOGIN SUCCESS!");
+				} else {
+					userName.setText("Invalid input");
+					passField.setText("TRY AGAIN!");
+				}
+				
 			}
 		});
 	}
 	
+	public HashMap<String,String> getUserMap(){
+		return users;
+	}
 	
 	public JButton getLogButton(){
 		return logButton;

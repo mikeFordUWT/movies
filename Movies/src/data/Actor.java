@@ -1,16 +1,20 @@
 package data;
 
+import java.util.ArrayList;
+
 public class Actor {
 	private String firstName;
 	private String middleName;
 	private String lastName;
 	private String actorID;
 	
+	
 	public Actor(String id, String first, String middle, String last) {
 		actorID = id;
 		firstName = first;
 		middleName = middle;
 		lastName = last;
+		
 	}
 	
 	public String getFirstName() {
@@ -28,6 +32,8 @@ public class Actor {
 	public String getID(){
 		return actorID;
 	}
+	
+	
 	
 	@Override
 	public String toString(){

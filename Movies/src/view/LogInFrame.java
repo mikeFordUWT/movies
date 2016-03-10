@@ -16,6 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Where every app starts and allows user to log in.
+ * @author michaelford
+ *
+ */
 public class LogInFrame extends JFrame {
 	
 	private HashMap<String, String> users;

@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,6 +18,8 @@ import data.Movie;
 import data.User;
 
 public class MovieFrame extends JFrame {
+	private static final int LOGO_SIZE = 0;
+
 	//The movie a page will be based on
 	private Movie myMovie;
 
@@ -29,6 +32,8 @@ public class MovieFrame extends JFrame {
 	private JLabel runTime;
 	private JLabel releaseYear;
 	private JLabel myActors;
+	private JLabel reelLogo;
+	
 	
 	
 	private JPanel northPanel;
@@ -37,6 +42,8 @@ public class MovieFrame extends JFrame {
 	private JButton homeButton;
 	private JButton favAdd;
 	private JButton watchAdd;
+	private JButton logOut;
+	
 	
 	private Color upperBarColor;
 	private Box upperBox;
@@ -44,8 +51,6 @@ public class MovieFrame extends JFrame {
 	private Box movieInfoBox;
 	private Box movieBox;
 	
-	private int width;
-	private int height;
 
 
 
@@ -61,8 +66,6 @@ public class MovieFrame extends JFrame {
 		super("Reel Log");
 		myMovie = inputMovie;
 		myUser = inputUser;
-		height = this.getHeight();
-		width = this .getWidth();
 //		myUser = inputUser;
 		buildFrame();
 		this.setLayout(new BorderLayout());
@@ -118,15 +121,34 @@ public class MovieFrame extends JFrame {
 	}
 	
 	private void buildUpper(){
+		
+		
 		northPanel = new JPanel();
+		Box mainUpper = Box.createVerticalBox();
 		upperBox = Box.createHorizontalBox();
 		upperBarColor = new Color(164,194,244);
+		
+		reelLogo = new JLabel("Reel Log");
+		reelLogo.setFont(new Font("Courier", Font.PLAIN, LOGO_SIZE));
+		reelLogo.setOpaque(true);
+		reelLogo.setAlignmentX(.5f);
+		reelLogo.setForeground(Color.BLACK);
+		reelLogo.setBackground(upperBarColor);
+		
+		
 		homeButton = new JButton("Home");
 		homeButton.setBackground(upperBarColor);
 		
+		logOut = new JButton("LOG OUT");
+		mainUpper.add(reelLogo);
+		
+		northPanel.setBackground(upperBarColor);
+		upperBox.add(reelLogo);
 		upperBox.add(homeButton);
+		upperBox.add(logOut);
 		upperBox.setBackground(upperBarColor);
-		northPanel.add(upperBox);
+		mainUpper.add(upperBox);
+		northPanel.add(mainUpper);
 
 	}
 	
@@ -144,6 +166,10 @@ public class MovieFrame extends JFrame {
 
 	public Movie getMovie(){
 		return myMovie;
+	}
+	
+	public JButton getLogOut(){
+		return logOut;
 	}
 
 

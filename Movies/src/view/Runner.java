@@ -75,6 +75,18 @@ public class Runner {
 	
 	private static void userFrameListeners(){
 		userSearchButton();
+		logOutListen();
+	}
+	
+	private static void logOutListen(){
+		userFr.getLogOut().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				userFr.setVisible(false);
+				log.setVisible(true);
+				
+			}
+		});
 	}
 	
 	private static void userSearchButton(){
@@ -89,8 +101,8 @@ public class Runner {
 				String newTitle = userFr.getSearchText();
 //				Movie newMovie = from title in database
 //				movie = new MovieFrame();
-//				movie.setVisible(true);
-//				userFr.setVisible(false);
+				movie.setVisible(true);
+				userFr.setVisible(false);
 			}
 		});
 	}
@@ -99,6 +111,17 @@ public class Runner {
 		movieHomeListen();
 		movieAddWatchListen();
 		movieAddFav();
+		movieLogOut();
+	}
+	
+	private static void movieLogOut(){
+		movie.getLogOut().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				movie.setVisible(false);
+				log.setVisible(true);
+			}
+		});
 	}
 	
 	//Listener for movie Frame home button, sends user back to home frame.

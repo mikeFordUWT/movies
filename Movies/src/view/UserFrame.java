@@ -23,18 +23,18 @@ import data.User;
 
 public class UserFrame extends JFrame {
 	private User currentUser;
-	
+
 	private final int LOGO_SIZE = 25;
 	
 	private final int WELCOME_SIZE = 20;
-	
+	private int height;
+	private int width;
 	
 	private ArrayList<Movie> favorites;
 	private ArrayList<Movie> watchList;
 	
 	
 	private JLabel reelLogo;
-	private JLabel userName;
 	
 	private JLabel logOut;
 	
@@ -50,6 +50,8 @@ public class UserFrame extends JFrame {
 	private JTable favTable;
 	private JTable watchTable;
 	
+	private Dimension screenSize;
+	
 	public UserFrame(User inputUser) {
 		
 		super("Reel Log");
@@ -57,21 +59,18 @@ public class UserFrame extends JFrame {
 		
 		
 		setUp();
-		
+		pack();
 		
 	}
 
 
 	
 	private void setUp(){
-		
-		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(100,100, screenSize.width/2, screenSize.height/2);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.WHITE);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		buildFrame();
 		this.setVisible(true);
 	}
@@ -105,6 +104,8 @@ public class UserFrame extends JFrame {
 	}
 	
 	private void buildCenter(){
+		addFavorites();
+		addWatchList();
 		welcome = new JLabel("Welcome, " + currentUser.getFirstName());
 		welcome.setFont(new Font("San Serif", Font.PLAIN, WELCOME_SIZE));
 		centerPanel = new JPanel();
@@ -113,7 +114,7 @@ public class UserFrame extends JFrame {
 		
 		searchText = new JTextField("", 15);
 		searchButton = new JButton("Search");
-		String[] choices = {"Actor", "Director", "Movie"};
+		String[] choices = {"actor", "director", "movie"};
 		searchType = new JComboBox<String>(choices);
 		searchBox.add(searchType);
 		searchBox.add(searchText);
@@ -128,12 +129,12 @@ public class UserFrame extends JFrame {
 		JScrollPane watchScroll = new JScrollPane(watchTable);
 		listBox.add(favScroll);
 		listBox.add(watchScroll);
-		
-		
+		listBox.setBackground(Color.WHITE);
 		mainBox.add(searchBox);
 		mainBox.add(listBox);
 		centerPanel.add(mainBox);
-	
+		
+		
 		add(centerPanel, BorderLayout.CENTER);
 		
 	}
@@ -146,6 +147,7 @@ public class UserFrame extends JFrame {
 		for(int i = 0; i<favorites.size(); i++){
 			model.addRow(new String[]{favorites.get(i).getTitle()});
 		}
+		
 	}
 	
 	private void addWatchList(){
@@ -156,10 +158,27 @@ public class UserFrame extends JFrame {
 		for(int i =0; i< watchList.size(); i++){
 			model.addRow(new String[]{watchList.get(i).getTitle()});
 		}
+		
+	}
+	
+	public void setUser(User inputUser){
+		currentUser = inputUser;
 	}
 	
 	public JLabel getLogOut() {
 		return logOut;
+	}
+	
+	public JButton getSearchButton(){
+		return searchButton;
+	}
+	
+	public String getSearchText(){
+		return searchText.getText();
+	}
+	
+	public JComboBox<String> getSearchType(){
+		return searchType;
 	}
 
 	

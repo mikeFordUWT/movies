@@ -1,14 +1,11 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
-import javax.swing.JFrame;
 
 import data.Actor;
+import data.Director;
 import data.Movie;
 import data.User;
 
@@ -16,17 +13,20 @@ public class Runner {
 	private static MovieFrame movieFr;
 	private static UserFrame userFr;
 	private static LogInFrame logFr;
-	private static SearchResultFrame searchFr;
+	private static SearchResultFrame<Movie> searchMovieFr;
+	private static SearchResultFrame<Actor> searchActorFr;
+	private static SearchResultFrame<Director> searchDirectorFr;
 
 	private static Movie currentMovie;
 
 	private static User currentUser;
 	public static void main(String[] args) {
 		logFr = new LogInFrame();
+		
 
 		currentUser = new User("U01", "Michael", "Ford", "fordm13@uw.edu");
 
-
+		
 
 		Actor a1 = new Actor("A61", "Jack", null, "Nicholson");
 		Actor a2 = new Actor("A22", "Shelley", null, "Duvall");
@@ -43,14 +43,19 @@ public class Runner {
 		userFr.setVisible(false);
 
 
-		movieFr = new MovieFrame(currentMovie, currentUser);
-		movieFr.setVisible(false);
+		movieFr = new MovieFrame(currentMovie, currentUser, 4.5);
+//		movieFr.setVisible(false);
+		listeners();
+		
+	}
+
+	private static void listeners(){
 		movieFrameListeners();
 		logInListeners();
 		userFrameListeners();
 		getSearchResultsListeners();
 	}
-
+	
 	private static void logInListeners(){
 		logInButtonListen();
 	}
@@ -123,8 +128,19 @@ public class Runner {
 		movieAddWatchListen();
 		movieAddFav();
 		movieLogOut();
+		movieRate();
 	}
 
+	private static void movieRate(){
+		movieFr.getRateButton().addMouseListener(new MouseAdapter(){
+			@Override
+			public void mouseClicked(MouseEvent e){
+				int rating = (int) movieFr.getRatingBox().getSelectedItem();
+				System.out.println(rating);
+				//TODO add rating to user-movie rating
+			}
+		});
+	}
 	private static void movieLogOut(){
 		movieFr.getLogOut().addMouseListener(new MouseAdapter() {
 			@Override
@@ -151,7 +167,7 @@ public class Runner {
 		movieFr.getWatchAdd().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//				currentUser.addToWatchList(movie.getMovie());
+//								currentUser.addToWatchList(currentMovie.getMovie());
 				//TODO add it in database
 			}
 		});

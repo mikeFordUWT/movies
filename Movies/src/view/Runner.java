@@ -2,17 +2,19 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 import data.Actor;
 import data.Movie;
+import data.User;
 
 public class Runner {
-
+		private MovieFrame movie;
 	public static void main(String[] args) {
-		StartFrame hello = new StartFrame();
+		
+		User mike = new User("U01", "Michael", "Ford", "fordm13@uw.edu");
+		StartFrame hello = new StartFrame(mike);
 		hello.setLayout(new BorderLayout());
 		hello.setBackground(Color.WHITE);
 		hello.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,9 +34,8 @@ public class Runner {
 		shining.addActor(a2);
 		shining.addActor(a3);
 		
-		MovieFrame movie = new MovieFrame(shining);
-		movie.setVisible(true);
-		System.out.println(shining.toString());
+//		MovieFrame movie = new MovieFrame(shining);
+		
 	}
 	
 	

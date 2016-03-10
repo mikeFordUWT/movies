@@ -15,8 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class StartFrame extends JFrame {
+import data.User;
 
+public class StartFrame extends JFrame {
+	private User myUser;
 	// A4C2F4 <- blue color
 	private static final int LOGO_SIZE = 36;
 	private static final int SIGN_IN_SIZE = 18;
@@ -34,8 +36,10 @@ public class StartFrame extends JFrame {
 	private JButton searchButton;
 
 
-	public StartFrame() {
+	public StartFrame(User theUser) {
 		super("Reel Log");
+		
+		myUser = theUser;
 		searchText = new JTextField("", 15);
 		searchButton = new JButton("Search");
 

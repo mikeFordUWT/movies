@@ -16,6 +16,7 @@ import data.Actor;
 import data.Director;
 import data.Movie;
 
+@SuppressWarnings("serial")
 public class SearchResultFrame<E> extends JFrame{
 	private static final int LOGO_SIZE = 0;
 	private JComboBox<String> resultBox;

@@ -136,4 +136,12 @@ public class LogInFrame extends JFrame {
 	public String getPassword(){
 		return passField.getText();
 	}
+	
+	public JTextField getUserField(){
+		return userName;
+	}
+	
+	public JTextField getPassField(){
+		return passField;
+	}
 }

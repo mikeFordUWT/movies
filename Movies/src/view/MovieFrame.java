@@ -30,16 +30,22 @@ public class MovieFrame extends JFrame {
 	private JLabel releaseYear;
 	private JLabel myActors;
 	
+	
 	private JPanel northPanel;
 	private JPanel centerPanel;
 	
-	private JButton home;
+	private JButton homeButton;
+	private JButton favAdd;
+	private JButton watchAdd;
 	
 	private Color upperBarColor;
 	private Box upperBox;
 	
 	private Box movieInfoBox;
 	private Box movieBox;
+	
+	private int width;
+	private int height;
 
 
 
@@ -51,9 +57,12 @@ public class MovieFrame extends JFrame {
 //	}
 
 	//A Movie Frame for is a user is logged in.
-	public MovieFrame(Movie inputMovie) {
+	public MovieFrame(Movie inputMovie, User inputUser) {
 		super("Reel Log");
 		myMovie = inputMovie;
+		myUser = inputUser;
+		height = this.getHeight();
+		width = this .getWidth();
 //		myUser = inputUser;
 		buildFrame();
 		this.setLayout(new BorderLayout());
@@ -63,17 +72,6 @@ public class MovieFrame extends JFrame {
 		
 	}
 
-	private void buildNotLoggedFrame(){
-		title = new JLabel(myMovie.getTitle());
-		rating = new JLabel(myMovie.getMPAA());
-		runTime = new JLabel(String.valueOf(myMovie.getRunTime()));
-		releaseYear = new JLabel(String.valueOf(myMovie.getYear()));
-		String actors = myMovie.getActors(myMovie.getActorList());
-
-		myActors = new JLabel(actors);
-
-
-	}
 
 	private void buildFrame(){
 
@@ -89,6 +87,8 @@ public class MovieFrame extends JFrame {
 	
 	private void buildCenter(){
 		centerPanel = new JPanel();
+		watchAdd = new JButton("Add to WatchList");
+		favAdd = new JButton("Add to Favorites");
 		movieBox = Box.createHorizontalBox();
 		movieInfoBox = Box.createVerticalBox();
 		movieBox.add(movieInfoBox);
@@ -108,6 +108,12 @@ public class MovieFrame extends JFrame {
 		movieInfoBox.add(rating);
 		movieInfoBox.add(runTime);
 		movieInfoBox.add(releaseYear);
+		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.add(favAdd);
+		buttonBox.add(watchAdd);
+		movieInfoBox.add(buttonBox);
+		
+		
 		centerPanel.add(movieBox);
 	}
 	
@@ -115,27 +121,30 @@ public class MovieFrame extends JFrame {
 		northPanel = new JPanel();
 		upperBox = Box.createHorizontalBox();
 		upperBarColor = new Color(164,194,244);
-		home = new JButton("Home");
+		homeButton = new JButton("Home");
+		homeButton.setBackground(upperBarColor);
 		
-		upperBox.add(home);
+		upperBox.add(homeButton);
 		upperBox.setBackground(upperBarColor);
 		northPanel.add(upperBox);
-		homeListen();
-	}
-	
-	private void homeListen(){
-		home.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e){
-				setVisible(false);
-			}
-		});
+
 	}
 	
 	public JButton getHomeButton(){
-		return home;
+		return homeButton;
+	}
+	
+	public JButton getFavAdd(){
+		return favAdd;
+	}
+	
+	public JButton getWatchAdd(){
+		return watchAdd;
 	}
 
+	public Movie getMovie(){
+		return myMovie;
+	}
 
 
 

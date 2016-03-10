@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -11,30 +12,45 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import data.Actor;
+import data.Director;
 import data.Movie;
 
-public class SearchResultFrame extends JFrame{
+public class SearchResultFrame<E> extends JFrame{
 	private static final int LOGO_SIZE = 0;
-	private JComboBox<String> movieBox;
-	private ArrayList<Movie> movieList;
+	private JComboBox<String> resultBox;
+	private ArrayList<E> searchList;
 	
 	private JLabel reelLogo;
 	private JPanel upperPanel;
 	private JLabel logOut;
 	
-	public SearchResultFrame(ArrayList<Movie> inputMovies) {
+	public SearchResultFrame(ArrayList<E> inputList) {
 		super("Reel Log");
-		movieList = inputMovies;
-		movieBox = new JComboBox<String>();
-		addMovies();
+		searchList = inputList;
+		resultBox = new JComboBox<String>();
+		addResults();
 		setUp();
 		
 	}
 	
-	private void addMovies(){
-		for(int i = 0; i<movieList.size(); i++){
-			movieBox.addItem(movieList.get(i).getTitle());
+	private void addResults(){
+		if(searchList.getClass().equals(Movie.class)){
+			for(int i = 0; i<searchList.size(); i++){
+				resultBox.addItem(((Movie) searchList.get(i)).getTitle());
+			}
+		}else if(searchList.getClass().equals(Actor.class)){
+			for(int i = 0; i<searchList.size(); i++){
+				String name = ((Actor) searchList.get(i)).getFirstName() + " " + ((Actor) searchList.get(i)).getLastName();
+				resultBox.addItem(name);
+			}
+		} else if(searchList.getClass().equals(Director.class)){
+			for(int i = 0; i<searchList.size(); i++){
+				String name = ((Director) searchList.get(i)).getFirstName() + " " + ((Director) searchList.get(i)).getLastName();
+				resultBox.addItem(name);
+			}
 		}
+		
 	}
 	
 	private void setUp(){
@@ -69,7 +85,7 @@ public class SearchResultFrame extends JFrame{
 		add(upperPanel, BorderLayout.NORTH);
 	}
 	
-	public JComboBox<String> getMovieBox(){
-		return movieBox;
+	public JComboBox<String> getResultBox(){
+		return resultBox;
 	}
 }

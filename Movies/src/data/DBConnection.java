@@ -3,14 +3,19 @@ package data;
 import java.sql.*;
 
 public class DBConnection {
+	
+	private static String USER = "fordm13";
+	
+	private static String PASS = "mikeServer";
+	
 	private Connection connect;
-	private String serverURL = "fordm13.vergil.u.wasington.edu";
+	private String serverURL = "jdbc:mysql://fordm13.vergil.u.washington.edu:1138/movies";
 	
 	
 	public DBConnection(String dbURL){
 		try{
-			Class.forName(serverURL);
-			connect = DriverManager.getConnection(dbURL);
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = DriverManager.getConnection(dbURL, USER, PASS);
 			System.out.println("Connected");
 		} catch (Exception ex) {
 			System.out.println("SQLException: " + ex.getMessage());

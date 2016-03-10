@@ -14,17 +14,17 @@ public class Runner {
 	public static void main(String[] args) {
 		
 		User mike = new User("U01", "Michael", "Ford", "fordm13@uw.edu");
-		StartFrame hello = new StartFrame(mike);
-		hello.setLayout(new BorderLayout());
-		hello.setBackground(Color.WHITE);
-		hello.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		hello.setVisible(true);
+//		StartFrame hello = new StartFrame(mike);
+//		hello.setLayout(new BorderLayout());
+//		hello.setBackground(Color.WHITE);
+//		hello.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		hello.setVisible(true);
 		
-		LogInFrame log = new LogInFrame();
-		log.setLayout(new BorderLayout());
-		log.setBackground(Color.WHITE);
-		log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		log.setVisible(true);
+//		LogInFrame log = new LogInFrame();
+//		log.setLayout(new BorderLayout());
+//		log.setBackground(Color.WHITE);
+//		log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		log.setVisible(true);
 		
 		Actor a1 = new Actor("A61", "Jack", null, "Nicholson");
 		Actor a2 = new Actor("A22", "Shelley", null, "Duvall");
@@ -33,6 +33,8 @@ public class Runner {
 		shining.addActor(a1);
 		shining.addActor(a2);
 		shining.addActor(a3);
+		
+		UserFrame user = new UserFrame(mike);
 		
 //		MovieFrame movie = new MovieFrame(shining);
 		
